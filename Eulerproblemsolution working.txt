@@ -1,0 +1,83 @@
+import java.lang.Math;
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+    int limit = 1000000;
+    int d = 0;
+    int i;
+
+    List<Integer> primeList = new ArrayList<Integer>();
+
+    for(int p=2; p<=limit; p++ ) {
+      if(isPrime(p)) {
+        primeList.add(p);
+      }
+    }
+
+    long partialSolution = 0;
+    long finalSolution = 0;
+   
+    int totalStart = 1;
+    int totalEnd = 1000000;
+    int chunkRange = 50000;
+    
+    int start;
+    int end;
+
+    for(int x=0; x<=(totalEnd/chunkRange-1); x++) {
+
+      start = totalStart + x * chunkRange;
+      end = chunkRange * (1+x);
+
+      System.out.println("From: " + start + "  |  To : " + end);
+      
+      partialSolution = 0;
+      for(int j=start; j<=end; j++) {
+        i = 0;
+        d=j;
+
+        while(primeList.get(i)<=d) {
+            
+            if(d % primeList.get(i) == 0) {
+             // d *= (1- 1/i)
+              d -= d/primeList.get(i);
+            }
+            
+          if(i == primeList.size()-1) {
+            break;
+          } else {
+            i++;
+          }
+        }
+        partialSolution += d;    
+      }
+
+      finalSolution += (long)partialSolution;
+      System.out.println("PARTIAL SOLUTION CUMMULATED: " + finalSolution);
+    }
+
+    finalSolution--;
+
+    System.out.println("Solution is: " + finalSolution);
+   // System.out.println("Cycles: " + counter);
+
+  }
+
+
+
+	public static boolean isPrime(int number) {
+
+		for(int i=2; i<(int)Math.sqrt(number)+1; i++) {
+
+			if(number % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+
+}

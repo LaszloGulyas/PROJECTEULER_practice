@@ -1,0 +1,79 @@
+import java.lang.Math;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+      long grandTotal = 0;
+
+      int startPoint = 1;
+      int endPoint = 10000; //n-1
+     
+     for(int i=1; i<=100; i++) {
+        System.out.println("First: " + startPoint +  "Last: " + endPoint);
+        
+        grandTotal += calculateRange(startPoint, endPoint);
+        System.out.println("GrandTotal: " + grandTotal + "  | i: 100 / " + i);
+        startPoint += 10000;
+        endPoint += 10000;
+     }
+       System.out.println(grandTotal);
+	}
+
+  public static long calculateRange(int fromRange, int toRange) {
+
+		long counter = 0;
+
+		for(int d=fromRange; d<=toRange; d++) {
+
+			if(isPrime(d)) {
+				
+				counter += (long)(d-1);
+			} else {
+
+				counter += (long)getPerfects(d);
+			}
+		}	
+    return counter;
+  }
+
+
+	public static int getPerfects(int number) {
+
+		int i = 2;
+    
+		int originalNumber = number;
+    int output = number;		
+
+		while(i <= number) {
+      //System.out.println("teszt" + i);
+      if(number % i == 0) {
+        while(number % i == 0) {
+          number /= i;
+        }
+        originalNumber /= i;
+        output -= originalNumber;
+        i++;
+      } else {
+        i++;
+      }
+		}
+		return output;
+	}
+
+
+
+
+	public static boolean isPrime(int number) {
+
+		for(int i=2; i<(int)Math.sqrt(number)+1; i++) {
+
+			if(number % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+}

@@ -1,0 +1,6 @@
+
+N	java:S106/"9Replace this use of System.out or System.err by a logger.(‡ºËé
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ö¾¤ú8åÙ³–Ý.
+?
+java:S1125<")Remove the literal "false" boolean value.(žðá
+l	java:S127+"XRefactor the code in order to not assign to this loop counter from within the loop body.(¨…ÄK

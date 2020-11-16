@@ -1,0 +1,116 @@
+import java.lang.Math;
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+   
+    int maxRange = 2000;   
+
+    //------------------------------------------------------
+
+    System.out.println("Solution is: " + calculateRange(1, maxRange));
+    
+	}
+
+  public static long getSumOfList(List<Long> myList) {
+
+    long sum = 0;
+
+    for(int i=1; i<=myList.size(); i++) {
+
+      sum += (long)myList.get(i);
+    }
+    return sum;
+  }
+
+  public static long calculateRange(int fromRange, int toRange) {
+
+		long counter = 0;
+
+    if(fromRange <= 1) {
+      fromRange = 2;
+    }
+
+		for(int d=fromRange; d<=toRange; d++) {
+
+      counter += countPerfects(d);
+		}	
+    return counter;
+  }
+
+
+	public static int getPerfects(int number) {
+
+		int originalNumber = number;
+    int output = number;
+
+		int i = 2;		
+
+    if(number % i != 0){
+      output--;
+    }
+
+		while(i <= number) {
+      //System.out.println("teszt" + i);
+      if(number % i == 0) {
+        while(number % i == 0) {
+          number /= i;
+        }
+        originalNumber /= i;
+        output -= originalNumber;
+        i++;
+      } else {
+        i++;
+      }
+		}
+		return output;
+	}
+
+  public static boolean isPerfect(int n, int d) {
+
+    for(int i=2; i<=n; i++) {
+
+      if(n % i == 0) {
+
+        if(d % i == 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+
+	public static boolean isPrime(int number) {
+
+		for(int i=2; i<(int)Math.sqrt(number)+1; i++) {
+
+			if(number % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+  public static int countPerfects(int d) {
+
+    int i = 2;
+    //int counter =0;
+
+    while(i<=d) {
+      counter++;
+      if(isPrime(i)) {
+        if(d % i == 0) {
+        
+          d = d - d/i;
+        }
+      }
+      i++;
+    }
+    //COUNTER
+    return d;
+  }
+}
